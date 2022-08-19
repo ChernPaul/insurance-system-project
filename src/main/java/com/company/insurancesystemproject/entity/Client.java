@@ -6,6 +6,7 @@ import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDelete;
 import io.jmix.core.metamodel.annotation.Composition;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -20,7 +21,9 @@ import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "CLIENT")
+@Table(name = "CLIENT", indexes = {
+        @Index(name = "IDX_CLIENT_USER", columnList = "USER_ID")
+})
 @Entity
 public class Client {
     @JmixGeneratedValue
@@ -28,6 +31,7 @@ public class Client {
     @Id
     private UUID id;
 
+    @InstanceName
     @Column(name = "FULLNAME", nullable = false)
     @NotNull
     private String fullname;
@@ -37,7 +41,12 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private List<Agreement> agreements;
 
-    @Email
+    @JoinColumn(name = "USER_ID", nullable = false)
+    @NotNull
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    private User user;
+
+    @Email(message = "{msg://com.company.insurancesystemproject.entity/Client.email.validation.Email}")
     @Column(name = "EMAIL", nullable = false)
     @NotNull
     private String email;
@@ -76,6 +85,14 @@ public class Client {
     @Column(name = "LAST_MODIFIED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedDate;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<Agreement> getAgreements() {
         return agreements;

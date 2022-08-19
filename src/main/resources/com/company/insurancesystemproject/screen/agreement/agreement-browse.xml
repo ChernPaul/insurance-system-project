@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://agreementBrowse.caption"
+        focusComponent="agreementsTable">
+    <data readOnly="true">
+        <collection id="agreementsDc"
+                    class="com.company.insurancesystemproject.entity.Agreement">
+            <fetchPlan extends="_base">
+                <property name="client" fetchPlan="_base"/>
+                <property name="branchOffice" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="agreementsDl">
+                <query>
+                    <![CDATA[select e from Agreement e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="agreementsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="agreementsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="agreementsTable"
+                    width="100%"
+                    dataContainer="agreementsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="conclusionDate"/>
+                <column id="insuranceAmount"/>
+                <column id="tariffRate"/>
+                <column id="insuranceType"/>
+                <column id="expirationDate"/>
+                <column id="client"/>
+                <column id="branchOffice"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="agreementsTable.create"/>
+                <button id="editBtn" action="agreementsTable.edit"/>
+                <button id="removeBtn" action="agreementsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

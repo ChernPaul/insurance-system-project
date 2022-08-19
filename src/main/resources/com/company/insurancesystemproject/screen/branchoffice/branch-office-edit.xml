@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://branchOfficeEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="branchOfficeDc"
+                  class="com.company.insurancesystemproject.entity.BranchOffice">
+            <fetchPlan extends="_base">
+                <property name="agreements" fetchPlan="_base">
+                    <property name="client" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+            <collection id="agreementsDc" property="agreements"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="scrollBox">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="branchOfficeDc">
+                <column width="350px">
+                    <textField id="nameField" property="name"/>
+                    <textField id="addressField" property="address"/>
+                    <textField id="phoneNumberField" property="phoneNumber"/>
+                </column>
+            </form>
+            <groupBox id="agreementsBox"
+                      caption="msg://com.company.insurancesystemproject.entity/BranchOffice.agreements">
+                <table id="agreementsTable" dataContainer="agreementsDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="conclusionDate"/>
+                        <column id="insuranceAmount"/>
+                        <column id="tariffRate"/>
+                        <column id="insuranceType"/>
+                        <column id="expirationDate"/>
+                        <column id="client"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="agreementsTable.create"/>
+                        <button action="agreementsTable.edit"/>
+                        <button action="agreementsTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

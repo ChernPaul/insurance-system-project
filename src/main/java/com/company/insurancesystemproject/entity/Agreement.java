@@ -5,6 +5,7 @@ import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDeleteInverse;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -44,6 +45,7 @@ public class Agreement {
     @NotNull
     private Double tariffRate;
 
+    @InstanceName
     @Column(name = "INSURANCE_TYPE", nullable = false)
     @NotNull
     private String insuranceType;
@@ -88,9 +90,9 @@ public class Agreement {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Client client;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDeleteInverse(DeletePolicy.DENY)
     @JoinColumn(name = "BRANCH_OFFICE_ID", nullable = false)
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
     private BranchOffice branchOffice;
 
     public BranchOffice getBranchOffice() {
