@@ -1,8 +1,10 @@
 package com.company.insurancesystemproject.entity;
 
+import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,7 +19,10 @@ import java.util.Date;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "AGREEMENT")
+@Table(name = "AGREEMENT", indexes = {
+        @Index(name = "IDX_AGREEMENT_CLIENT", columnList = "CLIENT_ID"),
+        @Index(name = "IDX_AGREEMENT_BRANCH_OFFICE", columnList = "BRANCH_OFFICE_ID")
+})
 @Entity
 public class Agreement {
     @JmixGeneratedValue
@@ -77,6 +82,32 @@ public class Agreement {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    @OnDeleteInverse(DeletePolicy.DENY)
+    @JoinColumn(name = "CLIENT_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Client client;
+
+    @OnDeleteInverse(DeletePolicy.DENY)
+    @JoinColumn(name = "BRANCH_OFFICE_ID", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    private BranchOffice branchOffice;
+
+    public BranchOffice getBranchOffice() {
+        return branchOffice;
+    }
+
+    public void setBranchOffice(BranchOffice branchOffice) {
+        this.branchOffice = branchOffice;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public String getInsuranceType() {
         return insuranceType;

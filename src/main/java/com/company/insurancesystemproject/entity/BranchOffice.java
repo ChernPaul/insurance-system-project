@@ -1,8 +1,11 @@
 package com.company.insurancesystemproject.entity;
 
+import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.entity.annotation.OnDelete;
+import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +15,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
@@ -22,6 +26,11 @@ public class BranchOffice {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @OnDelete(DeletePolicy.DENY)
+    @Composition
+    @OneToMany(mappedBy = "branchOffice")
+    private List<Agreement> agreements;
 
     @Column(name = "NAME", nullable = false)
     @NotNull
@@ -65,6 +74,14 @@ public class BranchOffice {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public List<Agreement> getAgreements() {
+        return agreements;
+    }
+
+    public void setAgreements(List<Agreement> agreements) {
+        this.agreements = agreements;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
