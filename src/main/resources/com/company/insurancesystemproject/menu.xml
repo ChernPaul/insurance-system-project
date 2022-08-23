@@ -8,6 +8,8 @@
               caption="msg://com.company.insurancesystemproject.screen.branchoffice/branchOfficeBrowse.menu"/>
         <item screen="Client.browse"
               caption="msg://com.company.insurancesystemproject.screen.client/clientBrowse.menu"/>
+        <item screen="Agreement.browse"
+              caption="msg://com.company.insurancesystemproject.screen.agreement/agreementBrowse.menu"/>
     </menu>
 
 </menu-config>
