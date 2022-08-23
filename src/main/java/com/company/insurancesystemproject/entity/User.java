@@ -31,13 +31,13 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Column(name = "ID", nullable = false)
     @JmixGeneratedValue
     private UUID id;
-
-    @OnDeleteInverse(DeletePolicy.DENY)
-    @JoinColumn(name = "CLIENT_ID")
-    @Composition
-    @OneToOne(fetch = FetchType.LAZY)
-    private Client client;
-
+    /*
+        @OnDeleteInverse(DeletePolicy.DENY)
+        @JoinColumn(name = "CLIENT_ID", referencedColumnName = "ID")
+        @Composition
+        @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+        private Client client;
+        */
     @Version
     @Column(name = "VERSION", nullable = false)
     private Integer version;
@@ -69,14 +69,14 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
 
-    public Client getClient() {
+   /* public Client getClient() {
         return client;
     }
 
     public void setClient(Client client) {
         this.client = client;
     }
-
+    */
     public UUID getId() {
         return id;
     }

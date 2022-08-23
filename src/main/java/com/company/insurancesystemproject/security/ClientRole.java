@@ -1,3 +1,4 @@
+
 package com.company.insurancesystemproject.security;
 
 import com.company.insurancesystemproject.entity.Agreement;
@@ -6,12 +7,12 @@ import io.jmix.security.model.EntityPolicyAction;
 import io.jmix.security.role.annotation.EntityAttributePolicy;
 import io.jmix.security.role.annotation.EntityPolicy;
 import io.jmix.security.role.annotation.ResourceRole;
+import io.jmix.securityui.role.UiMinimalRole;
 import io.jmix.securityui.role.annotation.MenuPolicy;
 import io.jmix.securityui.role.annotation.ScreenPolicy;
 
-
 @ResourceRole(name = "client", code = "client-role")
-public interface ClientRole {
+public interface ClientRole extends UiMinimalRole {
 
     @EntityPolicy(
             entityClass = Agreement.class,
@@ -20,8 +21,8 @@ public interface ClientRole {
 
     @EntityAttributePolicy(
             entityClass = Agreement.class,
-            attributes = {"conclusionDate", "tariffRate", "insuranceAmount, insuranceType, expirationDate, client, " +
-                    "branchOffice"},
+            attributes = {"conclusionDate", "tariffRate", "insuranceType", "insuranceAmount", "expirationDate",
+                    "client", "branchOffice"},
             action = EntityAttributePolicyAction.VIEW)
 
     @ScreenPolicy(
@@ -31,4 +32,44 @@ public interface ClientRole {
 
     void agreement();
 
+
+    @Override
+    default void main() {
+
+    }
+
+    @Override
+    default void login() {
+
+    }
+
+    @Override
+    default void backgroundWork() {
+
+    }
+
+    @Override
+    default void layoutAnalyzer() {
+
+    }
+
+    @Override
+    default void inputDialog() {
+
+    }
+
+    @Override
+    default void notFoundScreen() {
+
+    }
+
+    @Override
+    default void selectValueDialog() {
+
+    }
+
+    @Override
+    default void keyValueEntity() {
+
+    }
 }
