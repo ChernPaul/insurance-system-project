@@ -21,9 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "CLIENT"
-        //indexes = {        @Index(name = "IDX_CLIENT_USER", columnList = "USER_ID")}
-)
+@Table(name = "CLIENT")
 @Entity
 public class Client {
     @JmixGeneratedValue
@@ -41,9 +39,10 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private List<Agreement> agreements;
 
+
     @JoinColumn(name = "USER_ID", nullable = false, unique = true)
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 
     @Email(message = "{msg://com.company.insurancesystemproject.entity/Client.email.validation.Email}")

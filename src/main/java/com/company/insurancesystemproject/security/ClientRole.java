@@ -2,6 +2,7 @@
 package com.company.insurancesystemproject.security;
 
 import com.company.insurancesystemproject.entity.Agreement;
+import com.company.insurancesystemproject.entity.User;
 import io.jmix.security.model.EntityAttributePolicyAction;
 import io.jmix.security.model.EntityPolicyAction;
 import io.jmix.security.role.annotation.EntityAttributePolicy;
@@ -32,6 +33,13 @@ public interface ClientRole extends UiMinimalRole {
 
     void agreement();
 
+    @EntityPolicy(
+            entityClass = User.class,
+            actions = {EntityPolicyAction.READ})
+    @EntityAttributePolicy(
+            entityClass = User.class,
+            attributes = "*",
+            action = EntityAttributePolicyAction.VIEW)
 
     @Override
     default void main() {
