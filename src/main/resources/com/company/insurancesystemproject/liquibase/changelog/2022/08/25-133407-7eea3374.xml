@@ -63,7 +63,7 @@
             <column name="VERSION" value="1"/>
             <column name="USERNAME" value="client1"/>
             <column name="ROLE_CODE" value="client-row-level-role"/>
-            <column name="ROLE_TYPE" value="row-level"/>
+            <column name="ROLE_TYPE" value="row_level"/>
         </insert>
 
 
@@ -80,7 +80,7 @@
             <column name="VERSION" value="1"/>
             <column name="USERNAME" value="client2"/>
             <column name="ROLE_CODE" value="client-row-level-role"/>
-            <column name="ROLE_TYPE" value="row-level"/>
+            <column name="ROLE_TYPE" value="row_level"/>
         </insert>
 
 
