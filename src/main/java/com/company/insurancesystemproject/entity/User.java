@@ -4,9 +4,8 @@ import io.jmix.core.DeletePolicy;
 import io.jmix.core.HasTimeZone;
 import io.jmix.core.annotation.Secret;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.entity.annotation.OnDelete;
+import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.entity.annotation.SystemLevel;
-import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
@@ -22,8 +21,7 @@ import java.util.UUID;
 @JmixEntity
 @Entity
 @Table(name = "USER_", indexes = {
-        @Index(name = "IDX_USER__ON_USERNAME", columnList = "USERNAME", unique = true),
-        @Index(name = "IDX_USER__CLIENT", columnList = "CLIENT_ID")
+        @Index(name = "IDX_USER__ON_USERNAME", columnList = "USERNAME", unique = true)
 })
 public class User implements JmixUserDetails, HasTimeZone {
 
@@ -33,10 +31,8 @@ public class User implements JmixUserDetails, HasTimeZone {
     private UUID id;
 
 
-
-    @JoinColumn(name = "CLIENT_ID")
-    @Composition
-    @OneToOne(fetch = FetchType.LAZY)
+    @OnDeleteInverse(DeletePolicy.UNLINK)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     private Client client;
 
     @Version

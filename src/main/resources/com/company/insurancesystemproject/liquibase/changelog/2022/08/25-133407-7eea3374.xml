@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+
+
+    <changeSet id="1" author="insurance-system-project" context="!cuba">
+
+        <insert tableName="USER_" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="bf844e6e-cbd2-49e3-aecd-82a101f3add9"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="client1"/>
+            <column name="PASSWORD" value="{noop}client"/>
+            <column name="ACTIVE" valueBoolean="true"/>
+        </insert>
+
+
+        <insert tableName="USER_" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="7bf47cf4-1299-4944-872c-f21cbcc918c2"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="client2"/>
+            <column name="PASSWORD" value="{noop}client"/>
+            <column name="ACTIVE" valueBoolean="true"/>
+        </insert>
+
+
+        <insert tableName="USER_" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="267b7272-5a58-4312-9da2-ddd940f4cd30"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="employee1"/>
+            <column name="PASSWORD" value="{noop}employee"/>
+            <column name="ACTIVE" valueBoolean="true"/>
+        </insert>
+
+
+        <insert tableName="USER_" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="759305d2-3f1c-4b61-b97b-70e02d91bc7c"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="employee2"/>
+            <column name="PASSWORD" value="{noop}employee"/>
+            <column name="ACTIVE" valueBoolean="true"/>
+        </insert>
+
+    </changeSet>
+
+
+    <changeSet id="2" author="insurance-system-project" context="!cuba">
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="0633d2d5-df2e-4b91-bf3f-588b8112fcbb"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="client1"/>
+            <column name="ROLE_CODE" value="client-role"/>
+            <column name="ROLE_TYPE" value="resource"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="d6b0348b-a0f2-46d4-b208-11e1c88a0e04"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="client1"/>
+            <column name="ROLE_CODE" value="client-row-level-role"/>
+            <column name="ROLE_TYPE" value="row_level"/>
+        </insert>
+
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="61d761a2-f25a-4710-8cf6-de0ada93d6a8"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="client2"/>
+            <column name="ROLE_CODE" value="client-role"/>
+            <column name="ROLE_TYPE" value="resource"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="3ac05937-3e3f-4a75-a612-f7e9e2a4fd56"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="client2"/>
+            <column name="ROLE_CODE" value="client-row-level-role"/>
+            <column name="ROLE_TYPE" value="row_level"/>
+        </insert>
+
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="6c501d3d-28ad-49e2-b4bc-b0da01c603e4"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="employee1"/>
+            <column name="ROLE_CODE" value="employee-role"/>
+            <column name="ROLE_TYPE" value="resource"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="71d5306c-2133-4779-b556-428fd49aee47"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="employee2"/>
+            <column name="ROLE_CODE" value="employee-role"/>
+            <column name="ROLE_TYPE" value="resource"/>
+        </insert>
+
+    </changeSet>
+
+
+    <changeSet id="3" author="insurance-system-project" context="!cuba">
+
+        <createTable tableName="CLIENT">
+            <column name="ID" type="${uuid.type}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FULLNAME" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID"  type="${uuid.type}">
+                <constraints foreignKeyName="USER_ID" nullable="true"/>
+            </column>
+            <column name="EMAIL" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSPORT" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(255)"/>
+            <column name="CREATED_DATE" type="java.sql.types.timestamp"/>
+            <column name="DELETED_BY" type="varchar(255)"/>
+            <column name="DELETED_DATE" type="java.sql.types.timestamp"/>
+            <column name="LAST_MODIFIED_BY" type="varchar(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="java.sql.types.timestamp"/>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="4" author="insurance-system-project" context="!cuba">
+
+        <insert tableName="CLIENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="bf844e6e-cbd2-49e3-aecd-82a101f3add9"/>
+            <column name="FULLNAME" value="client1 fullname"/>
+            <column name="EMAIL" value="client1@gmail.com"/>
+            <column name="PASSPORT" value="2022 3915 673099"/>
+            <column name="USER_ID" value="bf844e6e-cbd2-49e3-aecd-82a101f3add9"/>
+            <column name="VERSION" value="1"/>
+        </insert>
+
+
+        <insert tableName="CLIENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="e9430162-1cd1-4837-b53d-20345ef15dfb"/>
+            <column name="FULLNAME" value="client2 fullname"/>
+            <column name="EMAIL" value="client2@gmail.com"/>
+            <column name="PASSPORT" value="2022 3970 673100"/>
+            <column name="USER_ID" value="7bf47cf4-1299-4944-872c-f21cbcc918c2"/>
+            <column name="VERSION" value="1"/>
+        </insert>
+
+
+    </changeSet>
+
+
+
+
+
+
+    <changeSet id="5" author="insurance-system-project" context="!cuba">
+
+        <createTable tableName="BRANCH_OFFICE">
+            <column name="ID" type="${uuid.type}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="NAME"  type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ADDRESS"  type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PHONE_NUMBER"  type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CREATED_BY" type="varchar(255)"/>
+            <column name="CREATED_DATE" type="java.sql.types.timestamp"/>
+            <column name="DELETED_BY" type="varchar(255)"/>
+            <column name="DELETED_DATE" type="java.sql.types.timestamp"/>
+            <column name="LAST_MODIFIED_BY" type="varchar(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="java.sql.types.timestamp"/>
+        </createTable>
+
+
+    </changeSet>
+
+    <changeSet id="6" author="insurance-system-project" context="!cuba">
+
+        <insert tableName="BRANCH_OFFICE" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="038527a5-a2d7-4f04-ae22-f7cbf83b0637"/>
+            <column name="NAME" value="SAMARA1"/>
+            <column name="ADDRESS" value="SOMEWHERE1"/>
+            <column name="PHONE_NUMBER" value="SOMEPHONE1"/>
+            <column name="VERSION" value="1"/>
+        </insert>
+
+        <insert tableName="BRANCH_OFFICE" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="89d93d6c-8cc5-45b0-8384-b913fd9bfb87"/>
+            <column name="NAME" value="SAMARA2"/>
+            <column name="ADDRESS" value="SOMEWHERE2"/>
+            <column name="PHONE_NUMBER" value="SOMEPHONE2"/>
+            <column name="VERSION" value="1"/>
+        </insert>
+
+        <insert tableName="BRANCH_OFFICE" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="ab5fc8a9-2a87-4249-896f-850038472e4c"/>
+            <column name="NAME" value="SAMARA3"/>
+            <column name="ADDRESS" value="SOMEWHERE3"/>
+            <column name="PHONE_NUMBER" value="SOMEPHONE3"/>
+            <column name="VERSION" value="1"/>
+        </insert>
+
+
+    </changeSet>
+
+
+    <changeSet id="7" author="insurance-system-project" context="!cuba">
+
+        <createTable tableName="AGREEMENT">
+            <column name="ID" type="${uuid.type}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONCLUSION_DATE" type="java.sql.types.timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXPIRATION_DATE"  type="java.sql.types.timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INSURANCE_TYPE"  type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INSURANCE_AMOUNT"  type="java.sql.Types.DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TARIFF_RATE"  type="java.sql.Types.DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CLIENT_ID"  type="${uuid.type}">
+                <constraints foreignKeyName="CLIENT_ID" nullable="false"/>
+            </column>
+            <column name="BRANCH_OFFICE_ID"  type="${uuid.type}">
+                <constraints foreignKeyName="BRANCH_OFFICE_ID" nullable="false"/>
+            </column>
+
+            <column name="CREATED_BY" type="varchar(255)"/>
+            <column name="CREATED_DATE" type="java.sql.types.timestamp"/>
+            <column name="DELETED_BY" type="varchar(255)"/>
+            <column name="DELETED_DATE" type="java.sql.types.timestamp"/>
+            <column name="LAST_MODIFIED_BY" type="varchar(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="java.sql.types.timestamp"/>
+        </createTable>
+
+    </changeSet>
+
+
+    <changeSet id="8" author="insurance-system-project" context="!cuba">
+
+        <insert tableName="AGREEMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="41bda0a2-1763-415d-a68e-109487bf594d"/>
+            <column name="CONCLUSION_DATE" value="2010-01-19 02:14:20"/>
+            <column name="EXPIRATION_DATE" value="2020-01-19 23:59:59"/>
+            <column name="INSURANCE_AMOUNT" value="100000"/>
+            <column name="INSURANCE_TYPE" value="HEALTH"/>
+            <column name="TARIFF_RATE" value="6000"/>
+            <column name="BRANCH_OFFICE_ID" value="89d93d6c-8cc5-45b0-8384-b913fd9bfb87"/>
+            <column name="CLIENT_ID" value="bf844e6e-cbd2-49e3-aecd-82a101f3add9"/>
+            <column name="VERSION" value="1"/>
+        </insert>
+
+        <insert tableName="AGREEMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="9f20b332-4f88-4502-a8cf-72d683db4720"/>
+            <column name="CONCLUSION_DATE" value="2014-01-19 02:14:20"/>
+            <column name="EXPIRATION_DATE" value="2026-01-19 12:00:00"/>
+            <column name="INSURANCE_AMOUNT" value="5000000"/>
+            <column name="INSURANCE_TYPE" value="HOUSE"/>
+            <column name="TARIFF_RATE" value="25000"/>
+            <column name="BRANCH_OFFICE_ID" value="038527a5-a2d7-4f04-ae22-f7cbf83b0637"/>
+            <column name="CLIENT_ID" value="bf844e6e-cbd2-49e3-aecd-82a101f3add9"/>
+            <column name="VERSION" value="1"/>
+        </insert>
+
+        <insert tableName="AGREEMENT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="bc0cfeac-d94e-4837-9272-c8d3a85db388"/>
+            <column name="CONCLUSION_DATE" value="2018-01-19 03:14:07"/>
+            <column name="EXPIRATION_DATE" value="2025-01-19 23:59:59"/>
+            <column name="INSURANCE_AMOUNT" value="7005100"/>
+            <column name="INSURANCE_TYPE" value="LIFE"/>
+            <column name="TARIFF_RATE" value="90000"/>
+            <column name="BRANCH_OFFICE_ID" value="ab5fc8a9-2a87-4249-896f-850038472e4c"/>
+            <column name="CLIENT_ID" value="e9430162-1cd1-4837-b53d-20345ef15dfb"/>
+            <column name="VERSION" value="1"/>
+        </insert>
+
+
+    </changeSet>
+
+
+</databaseChangeLog>

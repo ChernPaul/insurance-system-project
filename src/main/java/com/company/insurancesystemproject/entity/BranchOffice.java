@@ -28,9 +28,9 @@ public class BranchOffice {
     @Id
     private UUID id;
 
-    @OnDelete(DeletePolicy.DENY)
     @Composition
     @OneToMany(mappedBy = "branchOffice")
+    @OnDelete(DeletePolicy.DENY)
     private List<Agreement> agreements;
 
     @InstanceName

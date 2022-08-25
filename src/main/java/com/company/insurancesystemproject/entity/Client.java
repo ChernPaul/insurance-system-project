@@ -5,6 +5,7 @@ import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDelete;
+import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
@@ -40,10 +41,10 @@ public class Client {
     private List<Agreement> agreements;
 
 
+    @OnDeleteInverse(DeletePolicy.UNLINK)
     @OnDelete(DeletePolicy.UNLINK)
-    @JoinColumn(name = "USER_ID", nullable = false, unique = true)
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "USER_ID", unique = true)
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Email(message = "{msg://com.company.insurancesystemproject.entity/Client.email.validation.Email}")
