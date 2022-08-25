@@ -40,6 +40,7 @@ public class Client {
     private List<Agreement> agreements;
 
 
+    @OnDelete(DeletePolicy.UNLINK)
     @JoinColumn(name = "USER_ID", nullable = false, unique = true)
     @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)

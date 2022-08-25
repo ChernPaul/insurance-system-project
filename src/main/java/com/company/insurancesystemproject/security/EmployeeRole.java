@@ -80,9 +80,8 @@ public interface EmployeeRole extends UiMinimalRole {
             actions = {EntityPolicyAction.READ})
 
     @EntityAttributePolicy(
-            entityClass = BranchOffice.class,
-            attributes = {"client", "firstName", "lastName", "username"},
-
+            entityClass = User.class,
+            attributes = {"username", "firstName", "lastName", "email", "timeZoneId", "active"},
             action = EntityAttributePolicyAction.VIEW)
 
     @ScreenPolicy(
