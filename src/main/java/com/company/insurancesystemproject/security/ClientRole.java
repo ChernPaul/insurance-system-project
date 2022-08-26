@@ -27,7 +27,7 @@ public interface ClientRole extends UiMinimalRole {
             action = EntityAttributePolicyAction.VIEW)
 
     @ScreenPolicy(
-            screenIds = {"Agreement.browse"})
+            screenIds = {"Agreement.browse","Agreement.edit"})
     @MenuPolicy(
             menuIds = {"Agreement.browse"})
 
